@@ -1,0 +1,36 @@
+<svg width="240" height="60" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg">
+  <rect width="50" height="50" rx="10" fill="#991b1b"/>
+
+  <text
+    x="25"
+    y="33"
+    text-anchor="middle"
+    fill="white"
+    font-size="26"
+    font-family="Arial"
+    font-weight="bold"
+  >
+    G
+  </text>
+
+  <text
+    x="70"
+    y="32"
+    fill="#991b1b"
+    font-size="28"
+    font-family="Arial"
+    font-weight="bold"
+  >
+    GoodCred
+  </text>
+
+  <text
+    x="70"
+    y="50"
+    fill="#6b7280"
+    font-size="12"
+    font-family="Arial"
+  >
+    Soluciones financieras
+  </text>
+</svg>
