@@ -1,140 +1,53 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { NextResponse } from "next/server";
+import { Resend } from "resend";
 
-const archivo = path.join(
-  process.cwd(),
-  'consultas.json'
-);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function GET() {
+export async function POST(request: Request) {
   try {
-    if (!fs.existsSync(archivo)) {
-      return NextResponse.json([]);
-    }
+    const body = await request.json();
 
-    const consultas = JSON.parse(
-      fs.readFileSync(
-        archivo,
-        'utf8'
-      )
-    );
+    const {
+      nombre,
+      email,
+      telefono,
+      empresa,
+      mensaje,
+      montoCheque,
+      fechaPago,
+      dias,
+      interesAplicado,
+      resultadoCalculado,
+      origen,
+    } = body;
 
-    return NextResponse.json(
-      consultas
-    );
-  } catch (error) {
-    console.error(error);
+    await resend.emails.send({
+      from: "GoodCred <onboarding@resend.dev>",
+      to: "finanzassure@gmail.com",
+      subject: "Nueva consulta desde GoodCred",
+      html: `
+        <h2>Nueva consulta recibida</h2>
 
-    return NextResponse.json(
-      [],
-      {
-        status: 500,
-      }
-    );
-  }
-}
+        <p><strong>Origen:</strong> ${origen || "Web"}</p>
+        <p><strong>Nombre:</strong> ${nombre || "-"}</p>
+        <p><strong>Email:</strong> ${email || "-"}</p>
+        <p><strong>Teléfono:</strong> ${telefono || "-"}</p>
+        <p><strong>Empresa:</strong> ${empresa || "-"}</p>
 
-export async function POST(
-  request: Request
-) {
-  try {
-    const body =
-      await request.json();
+        <hr>
 
-    let consultas: any[] = [];
+        <p><strong>Monto del cheque:</strong> $${montoCheque || 0}</p>
+        <p><strong>Fecha de pago:</strong> ${fechaPago || "-"}</p>
+        <p><strong>Días:</strong> ${dias || 0}</p>
+        <p><strong>Tasa aplicada:</strong> ${interesAplicado || 0}%</p>
+        <p><strong>Resultado:</strong> $${resultadoCalculado || 0}</p>
 
-    if (
-      fs.existsSync(
-        archivo
-      )
-    ) {
-      consultas =
-        JSON.parse(
-          fs.readFileSync(
-            archivo,
-            'utf8'
-          )
-        );
-    }
+        <hr>
 
-    const nuevaConsulta = {
-      id:
-        Date.now(),
-
-      fecha:
-        new Date().toLocaleString(
-          'es-AR'
-        ),
-
-      estado:
-        'pendiente',
-
-      origen:
-        body.origen ||
-        'web',
-
-      nombre:
-        body.nombre ||
-        '',
-
-      email:
-        body.email ||
-        '',
-
-      telefono:
-        body.telefono ||
-        '',
-
-      empresa:
-        body.empresa ||
-        '',
-
-      mensaje:
-        body.mensaje ||
-        '',
-
-      montoCheque:
-        Number(
-          body.montoCheque || 0
-        ),
-
-      fechaPago:
-        body.fechaPago ||
-        '',
-
-      dias:
-        Number(
-          body.dias || 0
-        ),
-
-      interesAplicado:
-        Number(
-          body.interesAplicado || 0
-        ),
-
-      resultadoCalculado:
-        Number(
-          body.resultadoCalculado || 0
-        ),
-
-      imagenCheque:
-        body.imagenCheque ||
-        '',
-    };
-
-    consultas.unshift(
-      nuevaConsulta
-    );
-
-    fs.writeFileSync(
-      archivo,
-      JSON.stringify(
-        consultas,
-        null,
-        2
-      )
-    );
+        <p><strong>Mensaje:</strong></p>
+        <p>${mensaje || "-"}</p>
+      `,
+    });
 
     return NextResponse.json({
       ok: true,
@@ -145,6 +58,7 @@ export async function POST(
     return NextResponse.json(
       {
         ok: false,
+        error: "No se pudo enviar el correo",
       },
       {
         status: 500,
