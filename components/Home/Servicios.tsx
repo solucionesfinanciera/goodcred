@@ -13,7 +13,7 @@ const servicios = [
   },
   {
     titulo: 'Contacto',
-    texto: 'Hablá con un asesor de GoodCred.',
+    texto: 'Hablá con un asesor de FINANZAS SURE.',
     ruta: '/contacto',
   },
 ];

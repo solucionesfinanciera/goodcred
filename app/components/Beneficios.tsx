@@ -3,7 +3,7 @@ import styles from '../page.module.css';
 export default function Beneficios() {
   return (
     <section className={styles.beneficios}>
-      <h2>¿Por qué elegir GoodCred?</h2>
+      <h2>¿Por qué elegir FINANZAS SURE?</h2>
 
       <p>
         Más rápido, más simple y con atención personalizada.

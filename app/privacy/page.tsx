@@ -25,7 +25,7 @@ export default function Privacy() {
       </h1>
 
       <p>
-        En GoodCred
+        En FINANZAS SURE
         respetamos la
         privacidad de
         nuestros usuarios.
@@ -72,7 +72,7 @@ export default function Privacy() {
       </h2>
 
       <p>
-        contacto@goodcred.com
+        contacto@FINANZAS SURE.com
       </p>
     </main>
   );

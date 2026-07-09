@@ -1,9 +1,58 @@
+import { supabase } from "@/lib/supabase";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// ==========================
+// OBTENER CONSULTAS (PANEL)
+// ==========================
+
+export async function GET() {
+  try {
+    const { data, error } = await supabase
+      .from("consultas")
+      .select("*")
+      .order("id", { ascending: false });
+
+    if (error) {
+      console.error(error);
+      return NextResponse.json([]);
+    }
+
+    const consultas = (data || []).map((c: any) => ({
+      id: c.id,
+      fecha: c.fecha,
+      estado: c.estado,
+      origen: c.origen,
+
+      nombre: c.nombre,
+      email: c.correo_electronico,
+      telefono: c.telefono,
+      empresa: c.empresa,
+      mensaje: c.mensaje,
+
+      montoCheque: c.monto_cheque,
+      fechaPago: c.fecha_pago,
+      dias: c.dia,
+      interesAplicado: c.intereses_aplicado,
+      resultadoCalculado: c.resultado_calculado,
+
+      imagenCheque: c.imagen_cheque || "",
+    }));
+
+    return NextResponse.json(consultas);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json([]);
+  }
+}
+
+// ==========================
+// NUEVA CONSULTA
+// ==========================
 
 export async function POST(request: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY!);
+
   try {
     const body = await request.json();
 
@@ -19,12 +68,45 @@ export async function POST(request: Request) {
       interesAplicado,
       resultadoCalculado,
       origen,
+      imagenCheque,
     } = body;
+console.log("BODY RECIBIDO:", body);
+
+    const { error: dbError } = await supabase
+      .from("consultas")
+      .insert([
+          {
+  origen: origen || "Web",
+  estado: "pendiente",
+
+  nombre,
+  email,
+  telefono,
+  empresa,
+  mensaje,
+
+  monto_cheque: montoCheque,
+  fecha_pago: fechaPago,
+  dias,
+  interes_aplicado: interesAplicado,
+  resultado_calculado: resultadoCalculado,
+
+  imagen_cheque: imagenCheque || null,
+},
+      ]);
+
+   if (dbError) {
+  console.error("=================================");
+  console.error(dbError);
+  console.error("=================================");
+
+  throw dbError;
+}
 
     await resend.emails.send({
-      from: "GoodCred <onboarding@resend.dev>",
+      from: "FINANZAS SURE <onboarding@resend.dev>",
       to: "finanzassure@gmail.com",
-      subject: "Nueva consulta desde GoodCred",
+      subject: "Nueva consulta desde FINANZAS SURE",
       html: `
         <h2>Nueva consulta recibida</h2>
 
@@ -48,7 +130,7 @@ export async function POST(request: Request) {
         <p>${mensaje || "-"}</p>
       `,
     });
-
+console.log("ERROR SUPABASE:", dbError);
     return NextResponse.json({
       ok: true,
     });
@@ -58,7 +140,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         ok: false,
-        error: "No se pudo enviar el correo",
+        error: "No se pudo procesar la consulta",
       },
       {
         status: 500,

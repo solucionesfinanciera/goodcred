@@ -7,7 +7,7 @@ import WhatsAppButton from './components/WhatsAppButton';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'GoodCred | Descuento de Cheques de Pago Diferido',
+  title: 'FINANZAS SURE | Descuento de Cheques de Pago Diferido',
 
   description:
     'Calculá online el descuento de tu cheque de pago diferido. Recibí una propuesta rápida, segura y sin compromiso.',
@@ -16,14 +16,14 @@ export const metadata: Metadata = {
     'descuento de cheques',
     'cheques de pago diferido',
     'eCheq',
-    'GoodCred',
+    'FINANZAS SURE',
     'financiación empresas',
     'descuento de cheques argentina',
   ],
 
   authors: [
     {
-      name: 'GoodCred',
+      name: 'FINANZAS SURE',
     },
   ],
 

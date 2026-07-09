@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 export default function AdminPanel() {
   const [consultas, setConsultas] = useState<any[]>([]);
-  const [interes, setInteres] = useState(5);
+  const [interes, setInteres] = useState(8);
   const [tab, setTab] = useState<'activas' | 'temporal'>('activas');
   const [busqueda, setBusqueda] = useState('');
   const [imagenZoom, setImagenZoom] = useState<string | null>(null);
@@ -110,30 +110,25 @@ export default function AdminPanel() {
     } catch {}
   }
 
-  async function guardar() {
-    await fetch(
-      '/api/config',
-      {
-        method:
-          'POST',
+async function guardar() {
+  alert("Entró a guardar");
 
-        headers: {
-          'Content-Type':
-            'application/json',
-        },
+  const res = await fetch("/api/config", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      interes,
+    }),
+  });
 
-        body:
-          JSON.stringify({
-            interes,
-          }),
-      }
-    );
+  const data = await res.json();
 
-    alert(
-      'Guardado'
-    );
-  }
+  console.log(data);
 
+  alert(JSON.stringify(data));
+}
   async function eliminar(
     id: number
   ) {
@@ -490,7 +485,7 @@ const montoPromedio =
   />
 
   <button
-    onClick={guardar}
+    onClick={() => alert("BOTÓN FUNCIONA")}
     style={{
       width:'100%',
       marginTop:'10px',

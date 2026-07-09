@@ -56,7 +56,7 @@ export default function Login() {
           gap: '15px',
         }}
       >
-        <h1>Panel GoodCred</h1>
+        <h1>Panel FINANZAS SURE</h1>
 
         <input
           placeholder="Usuario"

@@ -18,7 +18,7 @@ export default function Beneficios() {
           marginBottom: '40px',
         }}
       >
-        ¿Por qué elegir GoodCred?
+        ¿Por qué elegir FINANZAS SURE?
       </h2>
 
       <div

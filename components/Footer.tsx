@@ -37,7 +37,7 @@ export default function Footer() {
       >
         <div>
           <h2>
-            GoodCred
+            FINANZAS SURE
           </h2>
 
           <p
@@ -123,7 +123,7 @@ export default function Footer() {
           </h3>
 
           <p>
-            contacto@goodcred.com
+            contacto@FINANZAS SURE.com
           </p>
 
           <p>
@@ -150,7 +150,7 @@ export default function Footer() {
             '#9ca3af',
         }}
       >
-        © 2026 GoodCred
+        © 2026 FINANZAS SURE
       </div>
     </footer>
   );

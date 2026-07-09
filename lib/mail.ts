@@ -33,7 +33,7 @@ export async function enviarEmail(
         .EMAIL_DESTINO,
 
     subject:
-      'Nueva consulta GoodCred',
+      'Nueva consulta FINANZAS SURE',
 
     html: `
       <h2>Nueva consulta</h2>

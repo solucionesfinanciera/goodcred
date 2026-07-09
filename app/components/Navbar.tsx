@@ -26,7 +26,7 @@ export default function Navbar() {
     fontSize: '30px',
   }}
 >
-  GoodCred
+  FINANZAS SURE
 </Link>
 
       <nav

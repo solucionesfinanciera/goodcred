@@ -1,83 +1,35 @@
-import fs from 'fs';
-import path from 'path';
+import { supabase } from "@/lib/supabase";
+import { NextResponse } from "next/server";
 
-const archivo = path.join(
-  process.cwd(),
-  'consultas.json'
-);
-
-export async function POST(
-  req: Request
-) {
+export async function POST(req: Request) {
   try {
-    const {
-      id,
-      estado,
-    } =
-      await req.json();
+    const { id, estado } = await req.json();
 
-    if (
-      !fs.existsSync(
-        archivo
-      )
-    ) {
-      return Response.json(
-        {
-          ok: false,
-        },
-        {
-          status: 404,
-        }
+    const { error } = await supabase
+      .from("consultas")
+      .update({
+        estado,
+      })
+      .eq("id", id);
+
+    if (error) {
+      console.error(error);
+
+      return NextResponse.json(
+        { ok: false },
+        { status: 500 }
       );
     }
 
-    const consultas =
-      JSON.parse(
-        fs.readFileSync(
-          archivo,
-          'utf8'
-        )
-      );
-
-    const nuevas =
-      consultas.map(
-        (
-          item: any
-        ) =>
-          item.id === id
-            ? {
-                ...item,
-                estado,
-              }
-            : item
-      );
-
-    fs.writeFileSync(
-      archivo,
-      JSON.stringify(
-        nuevas,
-        null,
-        2
-      )
-    );
-
-    return Response.json({
+    return NextResponse.json({
       ok: true,
     });
-  } catch (
-    error
-  ) {
-    console.error(
-      error
-    );
+  } catch (error) {
+    console.error(error);
 
-    return Response.json(
-      {
-        ok: false,
-      },
-      {
-        status: 500,
-      }
+    return NextResponse.json(
+      { ok: false },
+      { status: 500 }
     );
   }
 }

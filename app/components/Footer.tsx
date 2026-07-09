@@ -8,13 +8,13 @@ export default function Footer() {
         textAlign: 'center',
       }}
     >
-      <h2>GoodCred</h2>
+      <h2>FINANZAS SURE</h2>
 
       <p>
         Convertimos tu cheque en efectivo.
       </p>
 
-      <p>© 2026 GoodCred</p>
+      <p>© 2026 FINANZAS SURE</p>
     </footer>
   );
 }

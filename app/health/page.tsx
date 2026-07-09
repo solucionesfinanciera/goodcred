@@ -35,7 +35,7 @@ export default function Health() {
         </h1>
 
         <p>
-          GoodCred está listo
+          FINANZAS SURE está listo
           para producción.
         </p>
       </div>

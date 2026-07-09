@@ -26,7 +26,7 @@ export default function Terminos() {
 
       <p>
         Bienvenido a
-        GoodCred.
+        FINANZAS SURE.
       </p>
 
       <h2>
@@ -54,7 +54,7 @@ export default function Terminos() {
       </h2>
 
       <p>
-        GoodCred podrá
+        FINANZAS SURE podrá
         modificar el
         contenido del
         sitio cuando sea
@@ -66,7 +66,7 @@ export default function Terminos() {
       </h2>
 
       <p>
-        contacto@goodcred.com
+        contacto@FINANZAS SURE.com
       </p>
     </main>
   );

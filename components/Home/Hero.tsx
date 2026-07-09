@@ -1,48 +1,102 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Hero() {
   return (
     <section
       style={{
-        textAlign: 'center',
-        padding: '80px 0',
+        padding: "100px 20px",
+        textAlign: "center",
+        background:
+          "linear-gradient(to bottom, #f8fafc, #ffffff)",
       }}
     >
-      <h1
+      <div
         style={{
-          fontSize: '56px',
-          marginBottom: '20px',
-          color: '#991b1b',
+          maxWidth: "900px",
+          margin: "0 auto",
         }}
       >
-        GoodCred
-      </h1>
+        <span
+          style={{
+            display: "inline-block",
+            background: "#dcfce7",
+            color: "#15803d",
+            padding: "8px 18px",
+            borderRadius: "999px",
+            fontWeight: 700,
+            marginBottom: "25px",
+          }}
+        >
+          Descuento de Cheques
+        </span>
 
-      <p
-        style={{
-          fontSize: '22px',
-          color: '#4b5563',
-          maxWidth: '700px',
-          margin: '0 auto 40px',
-        }}
-      >
-        Soluciones financieras para empresas y comercios de todo el país.
-      </p>
+        <h1
+          style={{
+            fontSize: "64px",
+            lineHeight: "1.1",
+            color: "#0f172a",
+            fontWeight: 800,
+            marginBottom: "25px",
+          }}
+        >
+          Convertimos tu cheque
+          <br />
+          en efectivo.
+        </h1>
 
-      <Link
-        href="/contacto"
-        style={{
-          display: 'inline-block',
-          background: '#991b1b',
-          color: 'white',
-          padding: '14px 28px',
-          borderRadius: '10px',
-          textDecoration: 'none',
-          fontWeight: 'bold',
-        }}
-      >
-        Solicitar asesoramiento
-      </Link>
+        <p
+          style={{
+            fontSize: "22px",
+            color: "#64748b",
+            maxWidth: "700px",
+            margin: "0 auto 45px",
+            lineHeight: "1.7",
+          }}
+        >
+          Descontá cheques de pago diferido de manera rápida,
+          segura y transparente para obtener liquidez inmediata.
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "20px",
+            flexWrap: "wrap",
+          }}
+        >
+          <Link
+            href="/#calculadora"
+            style={{
+              background: "#16a34a",
+              color: "white",
+              padding: "16px 34px",
+              borderRadius: "999px",
+              textDecoration: "none",
+              fontWeight: 700,
+              boxShadow:
+                "0 10px 25px rgba(22,163,74,.25)",
+            }}
+          >
+            Calcular ahora
+          </Link>
+
+          <Link
+            href="/contacto"
+            style={{
+              background: "white",
+              color: "#0f172a",
+              padding: "16px 34px",
+              borderRadius: "999px",
+              textDecoration: "none",
+              fontWeight: 700,
+              border: "1px solid #e2e8f0",
+            }}
+          >
+            Contactar asesor
+          </Link>
+        </div>
+      </div>
     </section>
   );
 }

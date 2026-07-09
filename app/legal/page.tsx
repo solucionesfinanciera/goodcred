@@ -27,7 +27,7 @@ export default function Legal() {
       <p>
         Este sitio web es
         operado por
-        GoodCred.
+        FINANZAS SURE.
       </p>
 
       <h2>
@@ -50,8 +50,8 @@ export default function Legal() {
       <p>
         Los textos,
         diseños y elementos
-        del sitio pertenecen
-        a GoodCred salvo
+        del sFINANZAS SUREitio pertenecen
+        a  salvo
         indicación contraria.
       </p>
 
@@ -61,7 +61,7 @@ export default function Legal() {
       </h2>
 
       <p>
-        GoodCred no garantiza
+        FINANZAS SURE no garantiza
         disponibilidad
         permanente del
         servicio ni ausencia
@@ -73,7 +73,7 @@ export default function Legal() {
       </h2>
 
       <p>
-        contacto@goodcred.com
+        contacto@FINANZAS SURE.com
       </p>
     </main>
   );

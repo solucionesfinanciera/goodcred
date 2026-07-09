@@ -2,11 +2,12 @@
 
 import styles from './page.module.css';
 import { useEffect, useRef, useState } from 'react';
+import {ShieldCheck, Clock3, Landmark, Calculator, CircleDollarSign, BadgeCheck, Building2 } from "lucide-react";
 
 export default function Home() {
   const [monto, setMonto] = useState('');
   const [fechaPago, setFechaPago] = useState('');
-  const [interes, setInteres] = useState(5);
+  const [interes, setInteres] = useState(8);
   const inputArchivoRef = useRef<HTMLInputElement>(null);
 
   const [mostrarFormulario, setMostrarFormulario] =
@@ -52,7 +53,7 @@ export default function Home() {
         Number(data.interes)
       );
     } catch {
-      setInteres(5);
+      setInteres(8);
     }
   }
 
@@ -233,11 +234,30 @@ if (!imagenCheque) {
           }}
         >
           <h1 className={styles.heroTitulo}>
-  Descuento de cheques de pago diferido
+  Convertimos tu cheque
+  <br />
+
+  <span
+    style={{
+      color: "#16A34A",
+    }}
+  >
+    en liquidez inmediata.
+  </span>
 </h1>
 
-<p className={styles.heroTexto}>
-  Calculá en segundos cuánto recibirías por tu cheque y recibí una propuesta sin compromiso.
+<p
+  style={{
+    marginTop: 18,
+    fontSize: 18,
+    color: "#64748B",
+    maxWidth: 700,
+    marginInline: "auto",
+    lineHeight: 1.8,
+  }}
+>
+  Trabajamos con empresas, comercios y profesionales que necesitan
+  liquidez inmediata mediante el descuento de cheques.
 </p>
 <p
   style={{
@@ -269,14 +289,33 @@ if (!imagenCheque) {
     fontSize: '15px',
   }}
 >
-  <span>🏦 Empresas de todo el país</span>
+ <span
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    fontWeight: 600,
+  }}
+>
 
-  <span>⚡ Respuesta en el día</span>
+</span>
 
-  <span>🔒 Información confidencial</span>
+<span><Building2 size={44} color="#16A34A" /> Empresas de todo el país</span>
+  <span><Clock3 size={44} color="#16A34A" /> Respuesta en el día</span>
+<span><Landmark size={44} color="#16A34A" /> Operaciones bancarizadas</span>
+  <span><ShieldCheck size={44} color="#16A34A" /> Información confidencial</span>
 </div>
 
-          <div className={`${styles.calculadoraBox} ${styles.card}`}>
+          <div
+  className={styles.calculadoraBox}
+  style={{
+    background: "#FFFFFF",
+    borderRadius: "28px",
+    padding: "45px",
+    border: "1px solid #E5E7EB",
+    boxShadow: "0 20px 60px rgba(15,23,42,.10)",
+  }}
+>
             <div
               style={{
                 textAlign: 'center',
@@ -284,25 +323,28 @@ if (!imagenCheque) {
               }}
             >
               <h2
-                style={{
-                  fontSize: '34px',
-                  fontWeight: 700,
-                  color: '#166534',
-                  marginBottom: '12px',
-                }}
-              >
-                💰 Calculadora de descuento de cheques
-              </h2>
+  style={{
+    fontSize: "38px",
+    fontWeight: 800,
+    color: "#0F172A",
+    marginBottom: "10px",
+  }}
+>
+  Calculá cuánto recibirías
+</h2>
 
               <p
-                style={{
-                  color: '#6B7280',
-                  fontSize: '18px',
-                  marginBottom: '12px',
-                }}
-              >
-                Conocé cuánto dinero podrías recibir hoy mismo.
-              </p>
+  style={{
+    color: "#64748B",
+    fontSize: "17px",
+    marginBottom: "20px",
+    maxWidth: "500px",
+    marginInline: "auto",
+    lineHeight: 1.6,
+  }}
+>
+  Ingresá el monto y la fecha del cheque para obtener una estimación inmediata.
+</p>
 
               <div
                 style={{
@@ -314,7 +356,35 @@ if (!imagenCheque) {
                   fontWeight: 700,
                 }}
               >
-                Tasa vigente: {interes}% mensual
+                <div
+  style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "10px",
+    background: "#DCFCE7",
+    color: "#166534",
+    padding: "10px 18px",
+    borderRadius: "999px",
+    fontWeight: 700,
+  }}
+>
+  <BadgeCheck size={18} />
+  <div
+  style={{
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "10px",
+    background: "#DCFCE7",
+    color: "#166534",
+    padding: "10px 18px",
+    borderRadius: "999px",
+    fontWeight: 700,
+  }}
+>
+  <BadgeCheck size={18} />
+  Tasa vigente: {interes}% mensual
+</div>
+</div>
               </div>
             </div>
 
@@ -351,7 +421,18 @@ if (!imagenCheque) {
 
 
               <h3 className={styles.tituloResultado}>
-                Dinero estimado
+                <h3
+  className={styles.tituloResultado}
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "10px",
+  }}
+>
+  <CircleDollarSign size={28} />
+  Dinero estimado
+</h3>
               </h3>
               {calcularResultado() > 0 && (
   <div className={styles.resumenOperacion}>
@@ -574,7 +655,7 @@ if (!imagenCheque) {
           marginBottom: '10px',
         }}
       >
-        ⚡
+        <Clock3 size={44} color="#16A34A" />
       </h2>
 
       <h3>Respuesta rápida</h3>
@@ -590,7 +671,7 @@ if (!imagenCheque) {
           marginBottom: '10px',
         }}
       >
-        🔒
+        <ShieldCheck size={44} color="#16A34A" />
       </h2>
 
       <h3>Operación segura</h3>
@@ -606,7 +687,7 @@ if (!imagenCheque) {
           marginBottom: '10px',
         }}
       >
-        🤝
+        <Landmark size={44} color="#16A34A" />
       </h2>
 
       <h3>Atención personalizada</h3>
@@ -617,7 +698,7 @@ if (!imagenCheque) {
 </section>
 
 <section className={styles.beneficios}>
-        <h2>¿Por qué elegir GoodCred?</h2>
+        <h2>¿Por qué elegir FINANZAS SURE?</h2>
 
         <p>
           Más rápido, más simple y con atención personalizada.
@@ -625,7 +706,7 @@ if (!imagenCheque) {
 
         <div className={styles.gridBeneficios}>
           <div className={styles.itemBeneficio}>
-            <div className={styles.iconoBeneficio}>⚡</div>
+            <div className={styles.iconoBeneficio}><Clock3 size={44} color="#16A34A" /></div>
 
             <h3>Respuesta rápida</h3>
 
@@ -635,7 +716,9 @@ if (!imagenCheque) {
           </div>
 
           <div className={styles.itemBeneficio}>
-            <div className={styles.iconoBeneficio}>💰</div>
+            <div className={styles.iconoBeneficio}>
+  <CircleDollarSign size={46} color="#16A34A" strokeWidth={2.2} />
+</div>
 
             <h3>Tasas competitivas</h3>
 
@@ -645,7 +728,7 @@ if (!imagenCheque) {
           </div>
 
           <div className={styles.itemBeneficio}>
-            <div className={styles.iconoBeneficio}>🔒</div>
+            <div className={styles.iconoBeneficio}><ShieldCheck size={44} color="#16A34A" /></div>
 
             <h3>Operaciones seguras</h3>
 
@@ -655,7 +738,7 @@ if (!imagenCheque) {
           </div>
 
           <div className={styles.itemBeneficio}>
-            <div className={styles.iconoBeneficio}>🤝</div>
+            <div className={styles.iconoBeneficio}><Landmark size={44} color="#16A34A" /></div>
 
             <h3>Atención personalizada</h3>
 
