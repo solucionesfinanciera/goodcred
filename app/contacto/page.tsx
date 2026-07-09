@@ -1,181 +1,121 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-
-export default function Contacto() {
-  const router =
-    useRouter();
-
-  const [
-    loading,
-    setLoading,
-  ] =
-    useState(
-      false
-    );
-
-  async function enviar(
-    e: React.FormEvent<HTMLFormElement>
-  ) {
-    e.preventDefault();
-
-    setLoading(
-      true
-    );
-
-    try {
-      const form =
-        new FormData(
-          e.currentTarget
-        );
-
-      const res =
-        await fetch(
-          '/api/contacto',
-          {
-            method:
-              'POST',
-
-            body:
-              JSON.stringify({
-                nombre:
-                  form.get(
-                    'nombre'
-                  ),
-
-                email:
-                  form.get(
-                    'email'
-                  ),
-
-                telefono:
-                  form.get(
-                    'telefono'
-                  ),
-
-                mensaje:
-                  form.get(
-                    'mensaje'
-                  ),
-              }),
-
-            headers:
-              {
-                'Content-Type':
-                  'application/json',
-              },
-          }
-        );
-
-      const data =
-        await res.json();
-
-      if (
-        !res.ok ||
-        !data.ok
-      ) {
-        throw new Error();
-      }
-
-      router.push(
-        '/gracias'
-      );
-    } catch {
-      alert(
-        'Error al enviar'
-      );
-    }
-
-    setLoading(
-      false
-    );
-  }
-
+export default function Nosotros() {
   return (
     <main
       style={{
-        maxWidth:
-          '700px',
-
-        margin:
-          '60px auto',
-
-        padding:
-          '20px',
+        maxWidth: "1000px",
+        margin: "70px auto",
+        padding: "20px",
+        color: "#1F2937",
+        lineHeight: 1.8,
       }}
     >
-      <h1>
-        Contacto
-      </h1>
-
-      <form
-        onSubmit={
-          enviar
-        }
+      <h1
         style={{
-          display:
-            'flex',
-
-          flexDirection:
-            'column',
-
-          gap:
-            '16px',
+          fontSize: "48px",
+          fontWeight: 800,
+          marginBottom: "20px",
+          color: "#166534",
         }}
       >
-        <input
-          name="nombre"
-          required
-          placeholder="Nombre"
-        />
+        Sobre Finanzas Sure
+      </h1>
 
-        <input
-          name="email"
-          type="email"
-          required
-          placeholder="Email"
-        />
+      <p
+        style={{
+          fontSize: "20px",
+          color: "#4B5563",
+          marginBottom: "50px",
+        }}
+      >
+        Soluciones financieras ágiles, transparentes y seguras para empresas,
+        comercios y profesionales.
+      </p>
 
-        <input
-          name="telefono"
-          placeholder="Teléfono"
-        />
+      <section style={{ marginBottom: "50px" }}>
+        <h2 style={{ fontSize: "32px", marginBottom: "15px" }}>
+          Quiénes somos
+        </h2>
 
-        <textarea
-          name="mensaje"
-          required
-          rows={6}
-          placeholder="Mensaje"
-        />
+        <p>
+          En <strong>Finanzas Sure</strong> trabajamos para brindar soluciones
+          financieras simples y eficientes mediante el descuento de cheques,
+          ayudando a nuestros clientes a obtener liquidez inmediata para
+          potenciar el crecimiento de sus negocios.
+        </p>
 
-        <button
-          type="submit"
-          disabled={
-            loading
-          }
+        <p style={{ marginTop: "15px" }}>
+          Nuestro equipo acompaña cada operación con atención personalizada,
+          profesionalismo y absoluta confidencialidad.
+        </p>
+      </section>
+
+      <section style={{ marginBottom: "50px" }}>
+        <h2 style={{ fontSize: "32px", marginBottom: "15px" }}>
+          Nuestra misión
+        </h2>
+
+        <p>
+          Facilitar el acceso a financiamiento de manera rápida, segura y
+          transparente, ofreciendo soluciones adaptadas a las necesidades de
+          cada cliente.
+        </p>
+      </section>
+
+      <section style={{ marginBottom: "50px" }}>
+        <h2 style={{ fontSize: "32px", marginBottom: "15px" }}>
+          Nuestra visión
+        </h2>
+
+        <p>
+          Consolidarnos como una empresa referente en el mercado financiero,
+          reconocida por la confianza, la calidad del servicio y el compromiso
+          con nuestros clientes.
+        </p>
+      </section>
+
+      <section style={{ marginBottom: "50px" }}>
+        <h2 style={{ fontSize: "32px", marginBottom: "20px" }}>
+          Nuestros valores
+        </h2>
+
+        <ul
           style={{
-            background:
-              '#991b1b',
-
-            color:
-              'white',
-
-            border:
-              'none',
-
-            padding:
-              '16px',
-
-            borderRadius:
-              '10px',
+            paddingLeft: "25px",
+            fontSize: "18px",
           }}
         >
-          {loading
-            ? 'Enviando...'
-            : 'Enviar'}
-        </button>
-      </form>
+          <li>Transparencia en cada operación.</li>
+          <li>Compromiso con nuestros clientes.</li>
+          <li>Agilidad en las respuestas.</li>
+          <li>Seguridad y confidencialidad.</li>
+          <li>Profesionalismo y atención personalizada.</li>
+        </ul>
+      </section>
+
+      <section
+        style={{
+          background: "#F0FDF4",
+          padding: "35px",
+          borderRadius: "18px",
+          border: "1px solid #BBF7D0",
+        }}
+      >
+        <h2
+          style={{
+            color: "#166534",
+            marginBottom: "15px",
+          }}
+        >
+          Nuestro compromiso
+        </h2>
+
+        <p>
+          En Finanzas Sure creemos que cada cliente merece una solución clara,
+          rápida y confiable. Por eso trabajamos todos los días para construir
+          relaciones basadas en la confianza, acompañando el crecimiento de cada
+          empresa que nos elige.
+        </p>
+      </section>
     </main>
   );
 }

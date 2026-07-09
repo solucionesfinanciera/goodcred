@@ -103,48 +103,57 @@ console.log("BODY RECIBIDO:", body);
   throw dbError;
 }
 
-    await resend.emails.send({
-      from: "FINANZAS SURE <onboarding@resend.dev>",
-      to: "finanzassure@gmail.com",
-      subject: "Nueva consulta desde FINANZAS SURE",
-      html: `
-        <h2>Nueva consulta recibida</h2>
+    const { data, error } = await resend.emails.send({
+  from: "FINANZAS SURE <onboarding@resend.dev>",
+  to: "finanzassure@gmail.com",
+  subject: "Nueva consulta desde FINANZAS SURE",
+  html: `
+    <h2>Nueva consulta recibida</h2>
 
-        <p><strong>Origen:</strong> ${origen || "Web"}</p>
-        <p><strong>Nombre:</strong> ${nombre || "-"}</p>
-        <p><strong>Email:</strong> ${email || "-"}</p>
-        <p><strong>Teléfono:</strong> ${telefono || "-"}</p>
-        <p><strong>Empresa:</strong> ${empresa || "-"}</p>
+    <p><strong>Origen:</strong> ${origen || "Web"}</p>
+    <p><strong>Nombre:</strong> ${nombre || "-"}</p>
+    <p><strong>Email:</strong> ${email || "-"}</p>
+    <p><strong>Teléfono:</strong> ${telefono || "-"}</p>
+    <p><strong>Empresa:</strong> ${empresa || "-"}</p>
 
-        <hr>
+    <hr>
 
-        <p><strong>Monto del cheque:</strong> $${montoCheque || 0}</p>
-        <p><strong>Fecha de pago:</strong> ${fechaPago || "-"}</p>
-        <p><strong>Días:</strong> ${dias || 0}</p>
-        <p><strong>Tasa aplicada:</strong> ${interesAplicado || 0}%</p>
-        <p><strong>Resultado:</strong> $${resultadoCalculado || 0}</p>
+    <p><strong>Monto del cheque:</strong> $${montoCheque || 0}</p>
+    <p><strong>Fecha de pago:</strong> ${fechaPago || "-"}</p>
+    <p><strong>Días:</strong> ${dias || 0}</p>
+    <p><strong>Tasa aplicada:</strong> ${interesAplicado || 0}%</p>
+    <p><strong>Resultado:</strong> $${resultadoCalculado || 0}</p>
 
-        <hr>
+    <hr>
 
-        <p><strong>Mensaje:</strong></p>
-        <p>${mensaje || "-"}</p>
-      `,
-    });
-console.log("ERROR SUPABASE:", dbError);
+    <p><strong>Mensaje:</strong></p>
+    <p>${mensaje || "-"}</p>
+  `,
+});
+
+console.log("RESEND DATA:", data);
+console.log("RESEND ERROR:", error);
+
+if (error) {
+  throw error;
+}
+
     return NextResponse.json({
       ok: true,
     });
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+  console.error("============== ERROR API CONTACTO ==============");
+  console.error(error);
+  console.error("================================================");
 
-    return NextResponse.json(
-      {
-        ok: false,
-        error: "No se pudo procesar la consulta",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
+  return NextResponse.json(
+    {
+      ok: false,
+      error: error?.message || String(error),
+    },
+    {
+      status: 500,
+    }
+  );
+}
 }
